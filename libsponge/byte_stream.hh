@@ -1,6 +1,7 @@
 #ifndef SPONGE_LIBSPONGE_BYTE_STREAM_HH
 #define SPONGE_LIBSPONGE_BYTE_STREAM_HH
 
+#include <deque>
 #include <list>
 #include <string>
 
@@ -17,17 +18,17 @@ class ByteStream {
     // all, but if any of your tests are taking longer than a second,
     // that's a sign that you probably want to keep exploring
     // different approaches.
-    // Your code here -- add private members as necessary.
-    std::list<char> _buffer={};
-    size_t _capacity=0;
-    size_t _read_count=0;
-    size_t _write_count=0;
-    bool _input_ended_flag=false;
-    bool _error=false;  //!< Flag indicating that the stream suffered an error.
+
+    std::deque<char> _buffer = {};
+    size_t _capacity = 0;
+    size_t _read_count = 0;
+    size_t _write_count = 0;
+    bool _input_ended_flag = false;
+    bool _error = false;  //!< Flag indicating that the stream suffered an error.
 
   public:
     //! Construct a stream with room for `capacity` bytes.
-    ByteStream(const size_t capacity);
+    ByteStream(const size_t capacity = 0);
 
     //! \name "Input" interface for the writer
     //!@{

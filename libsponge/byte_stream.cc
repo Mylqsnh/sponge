@@ -35,21 +35,12 @@ size_t ByteStream::write(const string &data) {
 
 //! \param[in] len bytes will be copied from the output side of the buffer
 string ByteStream::peek_output(const size_t len) const {
-    stringstream buf;
-    string ret;
     size_t length = len;
 
     if (len > _buffer.size()) {
         length = _buffer.size();
     }
-
-    auto iter=_buffer.begin();
-    for(size_t i=0;i<length;i++){
-        buf<<(*iter);
-        iter++;
-    }
-    buf>>ret;
-    return ret;
+    return string().assign(_buffer.begin(), _buffer.begin() + length);
 }
 
 //! \param[in] len bytes will be removed from the output side of the buffer
@@ -59,9 +50,9 @@ void ByteStream::pop_output(const size_t len) {
         length = _buffer.size();
     }
 
-    while(length--){
+    _read_count += length;
+    while (length--) {
         _buffer.pop_front();
-        _read_count++;
     }
     return;
 }
