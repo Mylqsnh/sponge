@@ -1,5 +1,7 @@
 add_library (spongechecks STATIC byte_stream_test_harness.cc)
 
+SET(LIBPCAP "/usr/lib/x86_64-linux-gnu/libpcap.so")
+
 macro (add_test_exec exec_name)
     add_executable ("${exec_name}" "${exec_name}.cc")
     target_link_libraries ("${exec_name}" spongechecks ${ARGN})
