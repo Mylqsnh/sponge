@@ -65,6 +65,7 @@ long StreamReassembler::merge_block(block_node &elm1, const block_node &elm2) {
 void StreamReassembler::push_substring(const string &data, const size_t index, const bool eof) {
     // ALL = ( _head_index = stream start ) + (_capacity = ( first unread + first unassembled ) )
     // 索引值超过总容量
+    //_head_index: 期望收到的值
     if (index >= _head_index + _capacity) {  // capacity over
         return;
     }
